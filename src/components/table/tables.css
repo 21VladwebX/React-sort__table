@@ -1,0 +1,11 @@
+.tables{
+  background-color: darkgray;
+
+  text-align: left;
+  padding: 15px;
+  width: 100%;
+}
+.tables thead{
+  /*display: block;*/
+  margin-bottom: 20px;
+}
