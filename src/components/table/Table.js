@@ -42,6 +42,7 @@ class Table extends Component {
   };
 
   inputClick(e){
+    console.log(e.target.attributes.rowkey.value);
     this.setState({
       edit: {
         row: parseInt(e.target.attributes.rowkey.value),
@@ -53,8 +54,16 @@ class Table extends Component {
   save(e){
     e.preventDefault();
     let input = e.target.firstChild;
+    let data = this.state.data.slice();
 
-    console.log(input);
+    data[this.state.edit.row][this.state.edit.cell] = input.value;
+    // console.log(input);
+    // console.log(e.target);
+    this.setState({
+      edit: null,
+      data: data,
+    })
+
   }
 
     render() {
@@ -78,9 +87,11 @@ class Table extends Component {
                           title.map(function(title,key){
                             let edit = this.state.edit;
                             if(edit && edit.row === rowKey && edit.cell === key){
-                              return  <form onSubmit={this.save}>
-                                        <input defaultValue={title} type="text"/>
-                                      </form>
+                              return  <th key={key}>
+                                          <form onSubmit={this.save}>
+                                            <input defaultValue={title} type="text"/>
+                                          </form>
+                                      </th>
                             }
                             return <th rowkey={rowKey} key={key} >{title}</th>
                           }, this)}
