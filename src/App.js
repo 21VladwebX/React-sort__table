@@ -16,19 +16,48 @@ let data = [
 ];
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      preloader: true
+    };
 
+
+  this.preloaderLogic = this.preloaderLogic.bind(this);
+
+  setTimeout(this.preloaderLogic, 3000);
+
+  }
+
+
+  preloaderLogic(){
+
+    console.log(`this.state.preloader ${ this.state.preloader}`);
+    this.setState ({
+      preloader: false,
+    });
+    console.log(`this.state.preloader ${ this.state.preloader}`);
+  }
 
   render() {
+    let preloader;
+    if(this.state.preloader === true){
+      preloader = <div className="preloader">
+                    <div className="preloader-wrap">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>;
+    }
+    else{
+      preloader = ``;
+    }
     return (
       <div>
-        <div className="preloader">
-          <div className="preloader-wrap">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
+        {preloader}
+
         <div className="container">
 
           <Tables header={headers} data={data}/>
