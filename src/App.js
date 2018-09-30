@@ -20,11 +20,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Tables header={headers} data={data}/>
+      <div>
+        <div className="preloader">
+          <div className="preloader-wrap">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div className="container">
+
+          <Tables header={headers} data={data}/>
 
 
+        </div>
       </div>
+
     );
   }
 }
