@@ -19,6 +19,9 @@ class Table extends Component {
     this.togleSearch = this.togleSearch.bind(this);
     this.search = this.search.bind(this);
     this.logState = this.logState.bind(this);
+    this._replayToFirst = this._replayToFirst.bind(this);
+    this._replayOne = this._replayOne.bind(this);
+    this._goOn = this._goOn.bind(this);
 
     this.state = ({
       data: this.props.data,
@@ -31,6 +34,8 @@ class Table extends Component {
     this.preSearchData = null;
     this.filteredData = null;
     this.logHistory = [];
+    this.logHistoryLength = 0;
+    this.replayOne = 2;
 
   }
 
@@ -165,6 +170,39 @@ class Table extends Component {
 
   }
 
+  _replayToFirst(){
+
+    if(this.logHistory.length === 0 ){
+      console.warn(`No history in stateHistory`);
+      return;
+    }
+    let index = -1;
+    let interval = setInterval(function(){
+      index++;
+      if(index === this.logHistory.length - 1){ // end of history
+        clearInterval(interval);
+      }
+      this.setState(this.logHistory[index]);
+    }.bind(this),1000)
+  }
+  _replayOne(index){
+    if(this.logHistory.length === 0 ){
+      console.warn(`No history in stateHistory`);
+      return;
+    }
+    console.log(this.logHistory);
+    this.setState(this.logHistory[index]);
+  }
+
+  _goOn(index){
+    if(this.logHistory.length === 0 ){
+      console.warn(`No history in stateHistory`);
+      return;
+    }
+    console.log(`index is ${index}`);
+    // console.log(this.logHistory[index]);
+    this.setState(this.logHistory[index]);
+  }
 
   logState(newState){ // state log
 
@@ -174,9 +212,40 @@ class Table extends Component {
     this.setState(newState);
   }
 
+  /*life cycle*/
+  componentDidMount (){
 
+    var now = -1;
+    document.onkeydown = function (e) {
 
+      if(e.altKey && e.shiftKey && e.keyCode === 82){
+        //ALT + SHIFT + R
+        this._replayToFirst();
+      }
+      if(e.shiftKey && e.keyCode === 90){
+        //SHIFT + Z
+        console.log(now);
+        now = now === -1  ? this.logHistory.length : now;
+        now = now > 0 ? now - 1: 0;
+        console.log(`now is ${now}`);
+        this._replayOne(now);
+      }
+      if(e.shiftKey && e.keyCode === 81){
+        //SHIFT + Q
+        console.log(`now is ${now}`);
+        now = now === -1 ? 0 : now > this.logHistory.length - 1 ? now-1 : now;
+        now = now + 1;
+        console.log(`now is ${now}`);
+        this._goOn(now );
 
+      }
+
+    }.bind(this);
+  }
+  componentDidUpdate() {
+    this.logHistoryLength = this.logHistory.length;
+    this.replayOne = 1;
+  }
 
     render() {
 
