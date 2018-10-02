@@ -34,8 +34,6 @@ class Table extends Component {
     this.preSearchData = null;
     this.filteredData = null;
     this.logHistory = [];
-    this.logHistoryLength = 0;
-    this.replayOne = 2;
 
   }
 
@@ -199,8 +197,6 @@ class Table extends Component {
       console.warn(`No history in stateHistory`);
       return;
     }
-    console.log(`index is ${index}`);
-    // console.log(this.logHistory[index]);
     this.setState(this.logHistory[index]);
   }
 
@@ -224,18 +220,18 @@ class Table extends Component {
       }
       if(e.shiftKey && e.keyCode === 90){
         //SHIFT + Z
-        console.log(now);
+        // console.log(now);
         now = now === -1  ? this.logHistory.length : now;
         now = now > 0 ? now - 1: 0;
-        console.log(`now is ${now}`);
+        // console.log(`now is ${now}`);
         this._replayOne(now);
       }
       if(e.shiftKey && e.keyCode === 81){
         //SHIFT + Q
-        console.log(`now is ${now}`);
+        // console.log(`now is ${now}`);
         now = now === -1 ? 0 : now > this.logHistory.length - 1 ? now-1 : now;
         now = now + 1;
-        console.log(`now is ${now}`);
+        // console.log(`now is ${now}`);
         this._goOn(now );
 
       }
