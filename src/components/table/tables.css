@@ -1,11 +1,21 @@
 .tables{
   background-color: darkgray;
-
   text-align: left;
   padding: 15px;
+  /*width: 800px;*/
   width: 100%;
+}
+.tables table{
+  width: 100%;
+  padding: 0;
 }
 .tables thead{
   /*display: block;*/
   margin-bottom: 20px;
+}
+.input-search{
+  width: 200px;
+  width: 90%;
+  overflow: hidden;
+  /*height: 50px;*/
 }
