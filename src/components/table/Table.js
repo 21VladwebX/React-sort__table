@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './tables.css'
 
 class Table extends Component {
+
   static propTypes = {
     header: PropTypes.array,
     data: PropTypes.array
@@ -183,6 +184,7 @@ class Table extends Component {
       this.setState(this.logHistory[index]);
     }.bind(this),1000)
   }
+
   _replayOne(index){
     if(this.logHistory.length === 0 ){
       console.warn(`No history in stateHistory`);
@@ -207,9 +209,6 @@ class Table extends Component {
     )));
     this.setState(newState);
   }
-
-
-
 
   _download(type,event){
 
@@ -267,6 +266,7 @@ class Table extends Component {
 
     }.bind(this);
   }
+
   componentDidUpdate() {
     this.logHistoryLength = this.logHistory.length;
     this.replayOne = 1;
@@ -281,10 +281,9 @@ class Table extends Component {
               {this.state.search ? 'Enaf' : `Let\`s search`}
             </button>
             <div className="export">
-              {/*<a href="data.json" onClick={this._download.bind(this,'json')}>Export JSON</a>*/}
-              {/*<a href="data.csv" onClick={this._download.bind(this,'csv')}>Export CSV</a>*/}
-              <a href="#" onClick={this._download.bind(this,'json')}>Export JSON</a>
-              <a href="#" onClick={this._download.bind(this,'csv')}>Export CSV</a>
+              <a href="data.json" onClick={this._download.bind(this,'json')}>Export JSON</a>
+              <a href="data.csv" onClick={this._download.bind(this,'csv')}>Export CSV</a>
+
             </div>
           </div>
           <div className="tables">
