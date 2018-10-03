@@ -208,6 +208,35 @@ class Table extends Component {
     this.setState(newState);
   }
 
+
+
+
+  _download(type,event){
+
+    let contents = type === 'json'
+      ? JSON.stringify(this.props.header)
+      : this.props.header.map(function(result){
+        return `"${result}"` ;
+      });
+
+    contents += type === 'json'
+      ? JSON.stringify(this.state.data)
+      : this.state.data.reduce(function(result, row){
+        console.log(result);
+        return result + '\n' + row.reduce(function(rowresult, cell, index){
+          return rowresult + '"' + cell.replace(/"/g, '""') + '"' + (index < row.length ? ',' : '' );
+        },'');
+      }, '');
+
+    let URL = window.URL || window.webkitURL;
+    let blob = new Blob([contents], {
+      type: 'text/' + type
+      });
+    event.target.href = URL.createObjectURL(blob);
+    event.target.download = 'data.' + type;
+
+  }
+
   /*life cycle*/
   componentDidMount (){
 
@@ -251,6 +280,12 @@ class Table extends Component {
             <button onClick={this.togleSearch}>
               {this.state.search ? 'Enaf' : `Let\`s search`}
             </button>
+            <div className="export">
+              {/*<a href="data.json" onClick={this._download.bind(this,'json')}>Export JSON</a>*/}
+              {/*<a href="data.csv" onClick={this._download.bind(this,'csv')}>Export CSV</a>*/}
+              <a href="#" onClick={this._download.bind(this,'json')}>Export JSON</a>
+              <a href="#" onClick={this._download.bind(this,'csv')}>Export CSV</a>
+            </div>
           </div>
           <div className="tables">
             <table>
