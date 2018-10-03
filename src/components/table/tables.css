@@ -39,8 +39,31 @@
   box-shadow: 0 5px 20px rgba(205, 116, 44, .4), inset 0 5px 20px rgba(205, 116, 44, .4),inset 0 -5px 20px rgba(205, 116, 44, .4);
 }
 .toolbar button:hover{
-  color: #3fff46 ;
-  font-size: 18px;
+  color: #911e07 ;
+  /*font-size: 18px;*/
   background: transparent;
+  transform: scale(1.2);
   box-shadow: 5px 5px 20px rgba(205, 116, 44, .9), inset 5px 5px 20px rgba(205, 116, 44, .9),inset 5px -5px 20px rgba(205, 116, 44, .9)
+}
+.export{
+  display: flex;
+  padding: 15px;
+}
+
+.export a{
+  width: 100px;
+  height: 50px;
+  background-color: #3fff46;
+  padding: 5px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30%;
+  transition: .8s all;
+}
+.export a:hover{
+  color: #911e07;
+  transform: scale(1.2);
+  background-color: transparent;
 }
