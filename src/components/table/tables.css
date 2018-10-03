@@ -4,6 +4,10 @@
   padding: 15px;
   /*width: 800px;*/
   width: 100%;
+  background:
+              linear-gradient(336deg, rgba(0,0,255,.2), rgba(0,0,255,0) 70.71%),
+              linear-gradient(217deg, rgba(255,0,0,.2), rgba(255,0,0,0) 70.71%),
+              linear-gradient(127deg, rgba(0,255,0,.2), rgba(0,255,0,0) 70.71%);
 }
 .tables table{
   width: 100%;
@@ -12,6 +16,7 @@
 .tables thead{
   /*display: block;*/
   margin-bottom: 20px;
+  color: #560629;
 }
 .input-search{
   width: 200px;
